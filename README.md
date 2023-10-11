@@ -24,3 +24,5 @@ tbd - still a work in progress
 Valorant will ban you for the use of third party apps, does this count, I'm not sure and am too lazy to look into it so use at your own risk, but if i get banned I'll say something and cry because my ruin dagger is lost forever
 
 tldr: no idea, but i hope so
+
+update: Actually I think it is legal because process lasso does practically the same thing
