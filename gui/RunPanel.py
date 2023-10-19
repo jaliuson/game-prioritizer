@@ -9,6 +9,7 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QRadioButton
 )
+from GamePrioritizer import *
 
 
 class RunPanel(QWidget):
@@ -18,7 +19,7 @@ class RunPanel(QWidget):
 
         buttonArray = QHBoxLayout()
         btn1 = QPushButton("Run")
-        btn1.clicked.connect(self.show_message_box)
+        btn1.clicked.connect(self.optimizeGames)
         buttonArray.setContentsMargins(0, 0, 0, 0)  
 
         buttonArray.addWidget(btn1)
@@ -26,7 +27,9 @@ class RunPanel(QWidget):
         self.setStyleSheet("border : 1px solid gray;")
 
     def optimizeGames(self):
-        print('run here')
+        targetGame = self.SelectorPanel.selected_game
+        run(targetGame)
+        self.show_message_box()
 
     def show_message_box(self):
         msg = QMessageBox()
