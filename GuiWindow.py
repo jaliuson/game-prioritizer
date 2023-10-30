@@ -8,7 +8,7 @@ from PyQt5.QtWidgets import (
     QVBoxLayout
 )
 from gui.LeftPanel import LeftPanel
-#from gui.RightPanel import RightPanel
+from gui.RightPanel import RightPanel
 
 class GamePrioritizerWindow(QWidget):
    def __init__(self, parent = None):
@@ -38,9 +38,12 @@ class Header(QWidget):
 class Body(QWidget):    
    def __init__(self, parent = None):
       super().__init__()
+
+      logPanel = RightPanel()
+
       panels = QHBoxLayout()
-      panels.addWidget(LeftPanel(self))
-      panels.addWidget(QLabel("right"))
+      panels.addWidget(LeftPanel(logPanel, self))
+      panels.addWidget(RightPanel(self))
       panels.setContentsMargins(0, 0, 0, 0)  
       self.setLayout(panels)
       self.setStyleSheet("border : 1px solid blue;")

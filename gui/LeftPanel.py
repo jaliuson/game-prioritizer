@@ -1,26 +1,21 @@
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, 
     QWidget, 
-    QLabel, 
-    QPushButton, 
-    QMessageBox, 
-    QHBoxLayout, 
     QVBoxLayout,
-    QRadioButton
 )
 
 from gui.GameSelector import SelectPanel
 from gui.RunPanel import RunPanel
 
 class LeftPanel(QWidget):
-    def __init__ (self, parent = None):
+    def __init__ (self, logPanel, parent = None):
         super().__init__()
+        self.logPanel = logPanel
         selector = SelectPanel()
         
         panelStack = QVBoxLayout()
         panelStack.addWidget(selector)
-        panelStack.addWidget(RunPanel(selector))
+        panelStack.addWidget(RunPanel(self.logPanel, selector))
         panelStack.setContentsMargins(0, 0, 0, 0)
 
         self.setLayout(panelStack)

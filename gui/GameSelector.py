@@ -1,12 +1,8 @@
 import sys
 from PyQt5.QtCore import Qt, pyqtSignal
 from PyQt5.QtWidgets import (
-    QApplication, 
     QWidget, 
     QLabel, 
-    QPushButton, 
-    QMessageBox, 
-    QHBoxLayout, 
     QVBoxLayout,
     QRadioButton
 )
@@ -20,12 +16,12 @@ class SelectPanel(QWidget):
         games = GAME_OPTIONS
         self.selected_game = None
         self.radio_buttons = []
-
+        
         gameSelector = QVBoxLayout()
         gameSelector.addWidget(QLabel("Select game to optimize"))
         for g in games:
             radio_button = QRadioButton(g)
-            radio_button.clicked.connect(self.on_radio_button_clicked)
+            radio_button.clicked.connect(self.onRadioBtnClick)
             self.radio_buttons.append(radio_button)
             gameSelector.addWidget(radio_button)
 
@@ -34,9 +30,8 @@ class SelectPanel(QWidget):
         self.setLayout(gameSelector)
         self.setStyleSheet("border : 1px solid gray;")
     
-    def on_radio_button_clicked(self):
+    def onRadioBtnClick(self):
         sender = self.sender()  # Get the radio button that was clicked
         if sender.isChecked():
             self.selected_game = sender.text()
-            updated_string = self.selected_game
-            self.string_updated.emit(updated_string)  # Emit the signal when the string changes
+            self.string_updated.emit(self.selected_game)  # Emit the signal when the string changes

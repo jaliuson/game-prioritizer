@@ -1,21 +1,20 @@
 import sys
 from PyQt5.QtWidgets import (
-    QApplication, 
     QWidget, 
-    QLabel, 
     QPushButton, 
     QMessageBox, 
     QHBoxLayout, 
-    QVBoxLayout,
-    QRadioButton
 )
 from GamePrioritizer import *
 
 
 class RunPanel(QWidget):
-    def __init__(self, selectorPanel, parent = None):
+    log_updated = pyqtSignal(list)  # Custom signal to update the log
+
+    def __init__(self, logPanel, selectorPanel, parent = None):
         super().__init__()
         self.SelectorPanel = selectorPanel
+        self.logPanel = logPanel
 
         buttonArray = QHBoxLayout()
         btn1 = QPushButton("Run")
@@ -28,7 +27,10 @@ class RunPanel(QWidget):
 
     def optimizeGames(self):
         targetGame = self.SelectorPanel.selected_game
-        run(targetGame)
+        self.logPanel.runLogData.append(run(targetGame, self.logPanel))
+        print('XXX >> ')
+        print(self.logPanel)
+        self.log_updated.emit(self.logPanel.runLogData)  # Emit the signal with the log message
         self.show_message_box()
 
     def show_message_box(self):
